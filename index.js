@@ -10,9 +10,9 @@ nodeSwgr = require("./swagger/nodeSwagger");
 app.use(bodyParser.json());
 app.use(express.json())
 
-
+//Routes
 app.use("/users", userRouter);
-app.use('/n/api-docs', swaggerUi.serve, swaggerUi.setup(nodeSwgr));
+app.use('/node_crud/api-docs', swaggerUi.serve, swaggerUi.setup(nodeSwgr));
 
 
 

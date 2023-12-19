@@ -161,46 +161,11 @@ const deleteRegisterUser = async (req, res) => {
     });
 };
 
-
-const listAllRegisterUsers = async (req, res) => {
-  const filters = {};
-
-  if (req.query.firstName) {
-    filters.firstName = new RegExp(req.query.firstName, "i");
-  }
-
-  if (req.query.lastName) {
-    filters.lastName = new RegExp(req.query.lastName, "i");
-  }
-
-  if (req.query.email) {
-    filters.email = new RegExp(req.query.email, "i");
-  }
-
-  if (req.query.phone) {
-    filters.phone = new RegExp(req.query.phone, "i");
-  }
-
-  const users = await User.find(filters).select('-_id')
-    .then((filtersUsers) => {
-      if (!filtersUsers) {
-        return res.status(404).json({ error: "User not found" });
-      }
-      res.json({
-        statusCode: 200,message: 'register User filter data fetched successfully',filtersUsers: filtersUsers});
-    })
-    .catch((error) => {
-      console.log("error", error);
-      res.status(500).json({ error: "Internal Server Error"});
-    });
-};
-
 module.exports = {
   getAllUser,
   getRegisterUserById,
   registerUser,
   deleteRegisterUser,
-  listAllRegisterUsers,
   updateRegisterUser,
   getLogin
 };
